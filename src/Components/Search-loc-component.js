@@ -29,10 +29,15 @@ const LocationColumn = styled.section`
 `;
 
 function SearchLocation({ locationName, location }) {
-  const { setSelectedLocation } = useContext(AppContext);
+  const { setSelectedLocation, setBottomSheetOpen } = useContext(AppContext);
 
   return (
-    <LocationSection onClick={() => {setSelectedLocation(locationName)}}>
+    <LocationSection
+      onClick={() => {
+        setSelectedLocation(locationName);
+        setBottomSheetOpen(false);
+      }}
+    >
       <span class="material-icons">location_on</span>
       <LocationColumn>
         <LocationName>{locationName}</LocationName>

@@ -3,6 +3,7 @@ import {
   GET_MENU_DATA,
   GET_LOCATION_DATA,
   SET_SELECTED_LOCATION,
+  SET_BOTTOM_SHEET_OPEN,
 } from "./AppTypes";
 
 export default (state, { type, payload }) => {
@@ -16,6 +17,11 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         selected_location: payload,
+      };
+    case SET_BOTTOM_SHEET_OPEN:
+      return {
+        ...state,
+        is_bottom_sheet_open: payload,
       };
     case GET_MENU_DATA:
       return {

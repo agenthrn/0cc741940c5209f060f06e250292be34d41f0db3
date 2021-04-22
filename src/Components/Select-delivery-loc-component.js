@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import AppContext from "../context/AppContext";
 
@@ -60,8 +60,7 @@ const BottomSheetSearchBox = styled.input`
 `;
 
 function SelectDelivery() {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const { selected_location, loading, getLocationData, location_data } = useContext(
+  const { selected_location, loading, getLocationData, location_data, setBottomSheetOpen, is_bottom_sheet_open } = useContext(
     AppContext
   );
 
@@ -70,16 +69,16 @@ function SelectDelivery() {
       <span class="material-icons">arrow_back</span>
       <LocationColumn>
         <Location>ALAMAT PENGANTARAN</Location>
-        <LocationName onClick={() => setIsBottomSheetOpen(true)}>
+        <LocationName onClick={() => setBottomSheetOpen(true)}>
           {selected_location} <span class="material-icons">expand_more</span>
         </LocationName>
       </LocationColumn>
-      <SwipeableBottomSheet overflowHeight={0} open={isBottomSheetOpen}>
+      <SwipeableBottomSheet overflowHeight={0} open={is_bottom_sheet_open}>
         <BottomSheetBody>
           <BottomSheetHeader>
             <span
               class="material-icons"
-              onClick={() => setIsBottomSheetOpen(false)}
+              onClick={() => setBottomSheetOpen(false)}
             >
               close
             </span>

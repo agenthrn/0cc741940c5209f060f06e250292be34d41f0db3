@@ -4,7 +4,7 @@ import AppContext from "./AppContext";
 
 import AppReducer from "./AppReducer";
 
-import { SET_APP_DATE, SET_SELECTED_LOCATION, GET_MENU_DATA, GET_LOCATION_DATA } from "./AppTypes";
+import { SET_APP_DATE, SET_SELECTED_LOCATION, SET_BOTTOM_SHEET_OPEN, GET_MENU_DATA, GET_LOCATION_DATA } from "./AppTypes";
 
 const AppState = ({ children }) => {
   const initialState = {
@@ -13,6 +13,7 @@ const AppState = ({ children }) => {
     location_data: [],
     selected_location: "Pilih alamat dahulu",
     loading: true,
+    is_bottom_sheet_open: false,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -23,6 +24,10 @@ const AppState = ({ children }) => {
 
   const setSelectedLocation = (payload) => {
     dispatch({ type: SET_SELECTED_LOCATION, payload });
+  };
+
+  const setBottomSheetOpen = (payload) => {
+    dispatch({ type: SET_BOTTOM_SHEET_OPEN, payload });
   };
 
   const getMenuData = async () => {
@@ -55,7 +60,7 @@ const AppState = ({ children }) => {
     }
   };
 
-  const { date, menu, location_data, selected_location, loading } = state;
+  const { date, menu, location_data, selected_location, loading, is_bottom_sheet_open } = state;
 
   return (
     <AppContext.Provider
@@ -65,10 +70,12 @@ const AppState = ({ children }) => {
         location_data,
         selected_location,
         loading,
+        is_bottom_sheet_open,
         setAppDate,
         getMenuData,
         getLocationData,
-        setSelectedLocation
+        setSelectedLocation,
+        setBottomSheetOpen
       }}
     >
       {children}
