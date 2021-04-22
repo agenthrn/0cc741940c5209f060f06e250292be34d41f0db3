@@ -1,12 +1,23 @@
 import SelectDay from "./Components/Select-day-component";
 import SelectDelivery from "./Components/Select-delivery-loc-component";
+import Tab from "./Components/Tab-component";
+import styled from "styled-components";
+
+import AppState from "./context/AppState";
+
+const AppBody = styled.section`
+  padding: 0 10px 0 10px;
+`;
 
 function App() {
   return (
-    <div>
-      <SelectDelivery />
-      <SelectDay />
-    </div>
+    <AppState>
+      <AppBody>
+        <SelectDelivery />
+        <SelectDay />
+        <Tab />
+      </AppBody>
+    </AppState>
   );
 }
 

@@ -1,0 +1,1 @@
+export const SET_APP_DATE = "SET_APP_DATE"

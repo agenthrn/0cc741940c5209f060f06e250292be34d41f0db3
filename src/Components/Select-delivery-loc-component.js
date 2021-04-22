@@ -3,23 +3,23 @@ import styled from "styled-components";
 
 const Location = styled.span`
   display: block;
-  color: "#6e7679";
+  color: #6e7679;
   font-size: 10px;
 `;
 
 const LocationName = styled.span`
   display: block;
   font-size: 18px;
-  color: "#424749";
+  color: #424749;
   font-weight: 600;
 `;
 
 const DeliverySection = styled.section`
-  margin: 20px;
+  margin: 20px 0 10px 0;
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 0.3fr 2fr;
+  grid-template-columns: 0.2fr 2fr;
 `;
 
 const LocationColumn = styled.section`
