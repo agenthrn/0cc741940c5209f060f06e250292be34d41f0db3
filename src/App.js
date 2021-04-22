@@ -6,7 +6,7 @@ import styled from "styled-components";
 import AppState from "./context/AppState";
 
 const AppBody = styled.section`
-  padding: 0 10px 0 10px;
+  padding: 0 16px 0 16px;
 `;
 
 function App() {

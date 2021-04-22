@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import AppContext from "../context/AppContext";
-
+import CardMenu from "./Card-menu-component";
 
 const TabSection = styled.section`
-  margin: 10px 0 10px 0;
+  margin: 8px 0 8px 0;
   text-align: center;
   display: grid;
   justify-content: center;
@@ -12,14 +12,18 @@ const TabSection = styled.section`
   grid-template-columns: 1fr 1fr;
 `;
 
-const BodySection = styled.section`
-
+const MenuSection = styled.section`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 8px;
 `;
 
 const TabSectionChild = styled.section`
   color: #424749;
-  padding: 10px 0 10px 0;
+  padding: 8px 0 8px 0;
   background: white;
+  font-size: 16px;
+  font-weight: 500;
   ${(props) =>
     props.active &&
     ` background: #424749;
@@ -28,9 +32,14 @@ const TabSectionChild = styled.section`
 `;
 
 function Tab() {
-  const { date } = useContext(AppContext);
+  const { date, loading, getMenuData, menu } = useContext(AppContext);
+
+  useEffect(() => {
+    getMenuData();
+  }, []);
 
   const [activeTab, setActiveTab] = useState(true);
+  const [category, setCategory] = useState("lunch");
 
   return (
     <>
@@ -38,22 +47,49 @@ function Tab() {
         {activeTab ? (
           <>
             <TabSectionChild active>Lunch</TabSectionChild>
-            <TabSectionChild onClick={() => setActiveTab(false)}>
+            <TabSectionChild
+              onClick={() => {
+                setActiveTab(false);
+                setCategory("dinner");
+              }}
+            >
               Dinner
             </TabSectionChild>
           </>
         ) : (
           <>
-            <TabSectionChild onClick={() => setActiveTab(true)}>
+            <TabSectionChild
+              onClick={() => {
+                setActiveTab(true);
+                setCategory("lunch");
+              }}
+            >
               Lunch
             </TabSectionChild>
             <TabSectionChild active>Dinner</TabSectionChild>
           </>
         )}
       </TabSection>
-      <BodySection>
+      <>
         <p>{FormatTimeDate(date)}</p>
-      </BodySection>
+      </>
+      <MenuSection>
+        {!loading &&
+          menu &&
+          menu.menu.map(
+            (menu) =>
+              menu.category == category && (
+                <CardMenu
+                  pictureUrl={menu.picture_url}
+                  rating={menu.rating}
+                  title={menu.title}
+                  author={menu.author}
+                  city={menu.city}
+                  price={menu.price}
+                />
+              )
+          )}
+      </MenuSection>
     </>
   );
 }

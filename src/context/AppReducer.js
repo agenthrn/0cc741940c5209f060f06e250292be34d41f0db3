@@ -1,4 +1,4 @@
-import { SET_APP_DATE } from "./AppTypes";
+import { SET_APP_DATE, GET_MENU_DATA } from "./AppTypes";
 
 export default (state, { type, payload }) => {
   switch (type) {
@@ -6,6 +6,12 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         date: payload,
+      };
+    case GET_MENU_DATA:
+      return {
+        ...state,
+        loading: false,
+        menu: payload,
       };
     default:
       return state;

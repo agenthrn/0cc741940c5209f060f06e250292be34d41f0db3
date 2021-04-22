@@ -4,18 +4,18 @@ import styled from "styled-components";
 const Location = styled.span`
   display: block;
   color: #6e7679;
-  font-size: 10px;
+  font-size: 8px;
 `;
 
 const LocationName = styled.span`
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   color: #424749;
   font-weight: 600;
 `;
 
 const DeliverySection = styled.section`
-  margin: 20px 0 10px 0;
+  margin: 16px 0 8px 0;
   display: grid;
   justify-content: center;
   align-items: center;

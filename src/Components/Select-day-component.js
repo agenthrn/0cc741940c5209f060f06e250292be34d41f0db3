@@ -6,7 +6,7 @@ import AppContext from "../context/AppContext";
 const DayName = styled.span`
   display: block;
   color: #6e7679;
-  font-size: 10px;
+  font-size: 8px;
   text-align: center;
   ${(props) =>
     props.inactive &&
@@ -16,7 +16,7 @@ const DayName = styled.span`
 
 const DayInt = styled.span`
   display: block;
-  font-size: 18px;
+  font-size: 16px;
   color: #424749;
   font-weight: 600;
   text-align: center;
@@ -27,7 +27,7 @@ const DayInt = styled.span`
 `;
 
 const DayItem = styled.span`
-  padding: 5px 21px 5px 21px;
+  padding: 4px 24px 4px 24px;
 `;
 
 const SelectDaySection = styled.section`
@@ -35,7 +35,7 @@ const SelectDaySection = styled.section`
   flex-wrap: nowrap;
   overflow-x: scroll;
   align-items: center;
-  margin: 10px 0 10px 0;
+  margin: 8px 0 8px 0;
 `;
 
 function SelectDay() {
