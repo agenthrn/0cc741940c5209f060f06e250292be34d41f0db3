@@ -6,6 +6,7 @@ import {
   SET_BOTTOM_SHEET_OPEN,
   SET_SNACKBAR_OPEN,
   SET_CART_DATA,
+  SET_SELECTED_CATEGORY,
 } from "./AppTypes";
 
 export default (state, { type, payload }) => {
@@ -19,6 +20,11 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         selected_location: payload,
+      };
+    case SET_SELECTED_CATEGORY:
+      return {
+        ...state,
+        selected_category: payload,
       };
     case SET_CART_DATA:
       return {

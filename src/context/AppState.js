@@ -4,7 +4,7 @@ import AppContext from "./AppContext";
 
 import AppReducer from "./AppReducer";
 
-import { SET_APP_DATE, SET_SELECTED_LOCATION, SET_CART_DATA, GET_CART_DATA, SET_BOTTOM_SHEET_OPEN, SET_SNACKBAR_OPEN, GET_MENU_DATA, GET_LOCATION_DATA } from "./AppTypes";
+import { SET_APP_DATE, SET_SELECTED_LOCATION, SET_CART_DATA, GET_CART_DATA, SET_BOTTOM_SHEET_OPEN, SET_SNACKBAR_OPEN, GET_MENU_DATA, GET_LOCATION_DATA, SET_SELECTED_CATEGORY } from "./AppTypes";
 
 const AppState = ({ children }) => {
   const initialState = {
@@ -13,6 +13,7 @@ const AppState = ({ children }) => {
     location_data: [],
     cart_data: [],
     selected_location: "Pilih alamat dahulu",
+    selected_category: "lunch",
     loading: true,
     is_bottom_sheet_open: false,
     is_snackbar_open: false,
@@ -26,6 +27,10 @@ const AppState = ({ children }) => {
 
   const setSelectedLocation = (payload) => {
     dispatch({ type: SET_SELECTED_LOCATION, payload });
+  };
+
+  const setSelectedCategory = (payload) => {
+    dispatch({ type: SET_SELECTED_CATEGORY, payload });
   };
 
   const setCartData = (payload) => {
@@ -70,7 +75,7 @@ const AppState = ({ children }) => {
     }
   };
 
-  const { date, menu, cart_data, location_data, selected_location, loading, is_bottom_sheet_open, is_snackbar_open } = state;
+  const { date, menu, cart_data, location_data, selected_location, selected_category, loading, is_bottom_sheet_open, is_snackbar_open } = state;
 
   return (
     <AppContext.Provider
@@ -80,6 +85,7 @@ const AppState = ({ children }) => {
         cart_data,
         location_data,
         selected_location,
+        selected_category,
         loading,
         is_bottom_sheet_open,
         is_snackbar_open,
@@ -89,7 +95,8 @@ const AppState = ({ children }) => {
         setSelectedLocation,
         setBottomSheetOpen,
         setSnackbarOpen,
-        setCartData
+        setCartData,
+        setSelectedCategory
       }}
     >
       {children}

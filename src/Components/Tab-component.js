@@ -7,33 +7,10 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Cart from "./Cart-component";
 
-const TabSection = styled.section`
-  margin: 8px 0 8px 0;
-  text-align: center;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: 1fr 1fr;
-`;
-
 const MenuSection = styled.section`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 8px;
-`;
-
-const TabSectionChild = styled.section`
-  color: #424749;
-  padding: 8px 0 8px 0;
-  background: white;
-  font-size: 16px;
-  font-weight: 500;
-  border: 2px solid #f1f1f2;
-  ${(props) =>
-    props.active &&
-    ` background: #424749;
-      color: white;
-    `}
 `;
 
 function Alert(props) {
@@ -44,6 +21,7 @@ function Tab() {
   const {
     date,
     selected_location,
+    selected_category,
     loading,
     getMenuData,
     menu,
@@ -55,47 +33,18 @@ function Tab() {
     getMenuData();
   }, []);
 
-  const [activeTab, setActiveTab] = useState(true);
-  const [category, setCategory] = useState("lunch");
+  // const [activeTab, setActiveTab] = useState(true);
+  // const [category, setCategory] = useState("lunch");
 
   return (
     <>
-      <TabSection>
-        {activeTab ? (
-          <>
-            <TabSectionChild active>Lunch</TabSectionChild>
-            <TabSectionChild
-              onClick={() => {
-                setActiveTab(false);
-                setCategory("dinner");
-              }}
-            >
-              Dinner
-            </TabSectionChild>
-          </>
-        ) : (
-          <>
-            <TabSectionChild
-              onClick={() => {
-                setActiveTab(true);
-                setCategory("lunch");
-              }}
-            >
-              Lunch
-            </TabSectionChild>
-            <TabSectionChild active>Dinner</TabSectionChild>
-          </>
-        )}
-      </TabSection>
-      <>
-        <p>{FormatTimeDate(date)}</p>
-      </>
+      <p>{FormatTimeDate(date)}</p>
       <MenuSection>
         {!loading &&
           menu &&
           menu.menu.map(
             (menu) =>
-              menu.category == category && (
+              menu.category == selected_category && (
                 <CardMenu
                   pictureUrl={menu.picture_url}
                   rating={menu.rating}
@@ -107,9 +56,7 @@ function Tab() {
               )
           )}
       </MenuSection>
-      <Snackbar
-        open={is_snackbar_open}
-      >
+      <Snackbar open={is_snackbar_open}>
         {selected_location == "Pilih alamat dahulu" ? (
           <Alert onClose={() => setSnackbarOpen(false)} severity="error">
             {selected_location}
