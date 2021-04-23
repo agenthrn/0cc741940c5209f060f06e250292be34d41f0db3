@@ -4,13 +4,24 @@ import AppContext from "../context/AppContext";
 import CardMenu from "./Card-menu-component";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
 import Cart from "./Cart-component";
 
 const MenuSection = styled.section`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+
+  @media (min-width: 550px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
   gap: 8px;
+`;
+
+const CurrentDate = styled.p`
+  font-weight: 800;
+  color: #424749;
 `;
 
 function Alert(props) {
@@ -33,12 +44,9 @@ function Tab() {
     getMenuData();
   }, []);
 
-  // const [activeTab, setActiveTab] = useState(true);
-  // const [category, setCategory] = useState("lunch");
-
   return (
     <>
-      <p>{FormatTimeDate(date)}</p>
+      <CurrentDate>{FormatTimeDate(date)}</CurrentDate>
       <MenuSection>
         {!loading &&
           menu &&

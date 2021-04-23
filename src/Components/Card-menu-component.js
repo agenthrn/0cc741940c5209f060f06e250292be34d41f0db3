@@ -44,13 +44,8 @@ const AddButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height:40px;
+  line-height: 40px;
 `;
-
-// const MenuImage = styled.img`
-//   width: 100%;
-//   height: 200px;
-// `;
 
 const MenuCardFooter = styled.section`
   display: grid;
@@ -61,7 +56,12 @@ const MenuCardFooter = styled.section`
 `;
 
 function CardMenu({ pictureUrl, rating, title, author, city, price }) {
-  const { setSnackbarOpen, setCartData, cart_data } = useContext(AppContext);
+  const {
+    setSnackbarOpen,
+    setCartData,
+    cart_data,
+    selected_location,
+  } = useContext(AppContext);
 
   return (
     <MenuCard>
@@ -94,11 +94,13 @@ function CardMenu({ pictureUrl, rating, title, author, city, price }) {
           </MenuPrice>
           <AddButton
             onClick={() => {
-              let data = cart_data;
-              data.push({ itemName: title, itemPrice: price });
-              setCartData(data);
+              if (selected_location != "Pilih alamat dahulu") {
+                let data = cart_data;
+                data.push({ itemName: title, itemPrice: price });
+                setCartData(data);
+              }
+
               setSnackbarOpen(true);
-              console.log(JSON.stringify(cart_data));
             }}
           >
             <span>ADD</span> <span class="material-icons">add</span>
