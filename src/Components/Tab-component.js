@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import AppContext from "../context/AppContext";
 import CardMenu from "./Card-menu-component";
@@ -8,6 +8,7 @@ import Cart from "./Cart-component";
 
 const MenuSection = styled.section`
   display: grid;
+  margin: 0 0 48px 0;
   grid-template-columns: repeat(1, 1fr);
 
   @media (min-width: 550px) {

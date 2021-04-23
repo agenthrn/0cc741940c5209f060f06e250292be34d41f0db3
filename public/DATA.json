@@ -11,12 +11,12 @@
         "category": "lunch"
       },
       {
-        "id": "1",
+        "id": "3",
         "author": "Kulina",
-        "title": "Ayam Bakar Madu Sabana Lamak",
-        "picture_url": "https://kln.imgix.net/production/J8D3MDQQV4-Ayam%20Bakar%20Madu%20Sabana%20Lamak.jpg?w=300",
-        "city": "Bandung",
-        "rating": 5.0,
+        "title": "Nasi Mangkok Dinner",
+        "picture_url": "https://kln.imgix.net/production/9JWAZOV0H0-b317e69029a352367e8d0b16df0bf0d2-cover-2.jpg",
+        "city": "Tangerang",
+        "rating": 3.2,
         "price" : 25000,
         "category": "lunch"
       },

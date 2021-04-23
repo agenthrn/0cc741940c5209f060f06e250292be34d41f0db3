@@ -5,10 +5,12 @@ import NumberFormat from "react-number-format";
 
 import AppContext from "../context/AppContext";
 
-const MenuCard = styled.section`
+const MenuCard = styled.div`
   box-shadow: 0 8px 10px 0 rgba(10, 31, 68, 0.1);
   max-width: 500px;
   height:250px:
+  border-radius:8px;
+  margin: 0 0 16px 0;
 `;
 
 const MenuCardBody = styled.section`
@@ -55,6 +57,15 @@ const MenuCardFooter = styled.section`
   align-items: center;
 `;
 
+const RatingSection = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 0.2fr 2fr;
+  font-weight:600;
+  color: #6e7679;
+`;
+
 function CardMenu({ pictureUrl, rating, title, author, city, price }) {
   const {
     setSnackbarOpen,
@@ -71,16 +82,19 @@ function CardMenu({ pictureUrl, rating, title, author, city, price }) {
         src={pictureUrl}
       />
       <MenuCardBody>
-        <ReactStars
-          count={5}
-          value={rating}
-          size={24}
-          isHalf={true}
-          emptyIcon={<i className="far fa-star"></i>}
-          halfIcon={<i className="fa fa-star-half-alt"></i>}
-          fullIcon={<i className="fa fa-star"></i>}
-          activeColor="#f9423a"
-        />
+        <RatingSection>
+          {rating}
+          <ReactStars
+            count={5}
+            value={rating}
+            size={24}
+            isHalf={true}
+            emptyIcon={<i className="far fa-star"></i>}
+            halfIcon={<i className="fa fa-star-half-alt"></i>}
+            fullIcon={<i className="fa fa-star"></i>}
+            activeColor="#f9423a"
+          />
+        </RatingSection>
         <MenuTitle>{title}</MenuTitle>
         <MenuMeta>{`by ${author} - ${city}`}</MenuMeta>
         <MenuCardFooter>
