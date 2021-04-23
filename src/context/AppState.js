@@ -4,16 +4,18 @@ import AppContext from "./AppContext";
 
 import AppReducer from "./AppReducer";
 
-import { SET_APP_DATE, SET_SELECTED_LOCATION, SET_BOTTOM_SHEET_OPEN, GET_MENU_DATA, GET_LOCATION_DATA } from "./AppTypes";
+import { SET_APP_DATE, SET_SELECTED_LOCATION, SET_CART_DATA, GET_CART_DATA, SET_BOTTOM_SHEET_OPEN, SET_SNACKBAR_OPEN, GET_MENU_DATA, GET_LOCATION_DATA } from "./AppTypes";
 
 const AppState = ({ children }) => {
   const initialState = {
     date: new Date(),
     menu: [],
     location_data: [],
+    cart_data: [],
     selected_location: "Pilih alamat dahulu",
     loading: true,
     is_bottom_sheet_open: false,
+    is_snackbar_open: false,
   };
 
   const [state, dispatch] = useReducer(AppReducer, initialState);
@@ -26,8 +28,16 @@ const AppState = ({ children }) => {
     dispatch({ type: SET_SELECTED_LOCATION, payload });
   };
 
+  const setCartData = (payload) => {
+    dispatch({ type: SET_CART_DATA, payload });
+  };
+
   const setBottomSheetOpen = (payload) => {
     dispatch({ type: SET_BOTTOM_SHEET_OPEN, payload });
+  };
+
+  const setSnackbarOpen = (payload) => {
+    dispatch({ type: SET_SNACKBAR_OPEN, payload });
   };
 
   const getMenuData = async () => {
@@ -48,7 +58,7 @@ const AppState = ({ children }) => {
         const toJSON = await locationData.json();
 
         const filter = toJSON.location.filter(function (el) {
-          return el.locationName.includes(key);
+          return el.locationName.toLowerCase().includes(key.toLowerCase());
         });
 
         dispatch({ type: GET_LOCATION_DATA, payload: filter });
@@ -60,22 +70,26 @@ const AppState = ({ children }) => {
     }
   };
 
-  const { date, menu, location_data, selected_location, loading, is_bottom_sheet_open } = state;
+  const { date, menu, cart_data, location_data, selected_location, loading, is_bottom_sheet_open, is_snackbar_open } = state;
 
   return (
     <AppContext.Provider
       value={{
         date,
         menu,
+        cart_data,
         location_data,
         selected_location,
         loading,
         is_bottom_sheet_open,
+        is_snackbar_open,
         setAppDate,
         getMenuData,
         getLocationData,
         setSelectedLocation,
-        setBottomSheetOpen
+        setBottomSheetOpen,
+        setSnackbarOpen,
+        setCartData
       }}
     >
       {children}

@@ -12,10 +12,12 @@ const Location = styled.span`
 `;
 
 const LocationName = styled.span`
-  display: block;
   font-size: 16px;
   color: #424749;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  line-height: 10px;
 `;
 
 const DeliverySection = styled.section`
@@ -60,17 +62,31 @@ const BottomSheetSearchBox = styled.input`
 `;
 
 function SelectDelivery() {
-  const { selected_location, loading, getLocationData, location_data, setBottomSheetOpen, is_bottom_sheet_open } = useContext(
-    AppContext
-  );
+  const {
+    selected_location,
+    loading,
+    getLocationData,
+    location_data,
+    setBottomSheetOpen,
+    is_bottom_sheet_open,
+    setSnackbarOpen,
+  } = useContext(AppContext);
 
   return (
     <DeliverySection>
       <span class="material-icons">arrow_back</span>
       <LocationColumn>
         <Location>ALAMAT PENGANTARAN</Location>
-        <LocationName onClick={() => setBottomSheetOpen(true)}>
-          {selected_location} <span class="material-icons">expand_more</span>
+        <LocationName
+          onClick={() => {
+            setBottomSheetOpen(true);
+            setSnackbarOpen(false);
+          }}
+        >
+          {selected_location}{" "}
+          <span style={{ color: "#f9423a" }} class="material-icons">
+            expand_more
+          </span>
         </LocationName>
       </LocationColumn>
       <SwipeableBottomSheet overflowHeight={0} open={is_bottom_sheet_open}>

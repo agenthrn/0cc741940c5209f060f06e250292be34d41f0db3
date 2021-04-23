@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
+import NumberFormat from "react-number-format";
 
 import AppContext from "../context/AppContext";
 
@@ -40,7 +41,10 @@ const AddButton = styled.button`
   background: #f9423a;
   color: white;
   padding: 0px;
-  line-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height:40px;
 `;
 
 // const MenuImage = styled.img`
@@ -57,9 +61,7 @@ const MenuCardFooter = styled.section`
 `;
 
 function CardMenu({ pictureUrl, rating, title, author, city, price }) {
-  const { date } = useContext(AppContext);
-
-  const [activeTab, setActiveTab] = useState(true);
+  const { setSnackbarOpen, setCartData, cart_data } = useContext(AppContext);
 
   return (
     <MenuCard>
@@ -82,24 +84,29 @@ function CardMenu({ pictureUrl, rating, title, author, city, price }) {
         <MenuTitle>{title}</MenuTitle>
         <MenuMeta>{`by ${author} - ${city}`}</MenuMeta>
         <MenuCardFooter>
-          <MenuPrice>Rp {price}</MenuPrice>
-          <AddButton>
-            ADD <span class="material-icons">add</span>
+          <MenuPrice>
+            <NumberFormat
+              value={price}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"Rp."}
+            />
+          </MenuPrice>
+          <AddButton
+            onClick={() => {
+              let data = cart_data;
+              data.push({ itemName: title, itemPrice: price });
+              setCartData(data);
+              setSnackbarOpen(true);
+              console.log(JSON.stringify(cart_data));
+            }}
+          >
+            <span>ADD</span> <span class="material-icons">add</span>
           </AddButton>
         </MenuCardFooter>
       </MenuCardBody>
     </MenuCard>
   );
-}
-
-function FormatTimeDate(date) {
-  const d = new Date(date);
-  return d.toLocaleDateString("id", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
 }
 
 export default CardMenu;

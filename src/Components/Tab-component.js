@@ -2,6 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import AppContext from "../context/AppContext";
 import CardMenu from "./Card-menu-component";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
+import Cart from "./Cart-component";
 
 const TabSection = styled.section`
   margin: 8px 0 8px 0;
@@ -24,6 +28,7 @@ const TabSectionChild = styled.section`
   background: white;
   font-size: 16px;
   font-weight: 500;
+  border: 2px solid #f1f1f2;
   ${(props) =>
     props.active &&
     ` background: #424749;
@@ -31,8 +36,20 @@ const TabSectionChild = styled.section`
     `}
 `;
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 function Tab() {
-  const { date, loading, getMenuData, menu } = useContext(AppContext);
+  const {
+    date,
+    selected_location,
+    loading,
+    getMenuData,
+    menu,
+    is_snackbar_open,
+    setSnackbarOpen,
+  } = useContext(AppContext);
 
   useEffect(() => {
     getMenuData();
@@ -90,6 +107,17 @@ function Tab() {
               )
           )}
       </MenuSection>
+      <Snackbar
+        open={is_snackbar_open}
+      >
+        {selected_location == "Pilih alamat dahulu" ? (
+          <Alert onClose={() => setSnackbarOpen(false)} severity="error">
+            {selected_location}
+          </Alert>
+        ) : (
+          <Cart />
+        )}
+      </Snackbar>
     </>
   );
 }

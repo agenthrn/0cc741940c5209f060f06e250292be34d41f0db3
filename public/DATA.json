@@ -7,7 +7,7 @@
         "picture_url": "https://kln.imgix.net/production/J8D3MDQQV4-Ayam%20Bakar%20Madu%20Sabana%20Lamak.jpg?w=300",
         "city": "Bandung",
         "rating": 5.0,
-        "price" : "25.000",
+        "price" : 25000,
         "category": "lunch"
       },
       {
@@ -17,7 +17,7 @@
         "picture_url": "https://kln.imgix.net/production/J8D3MDQQV4-Ayam%20Bakar%20Madu%20Sabana%20Lamak.jpg?w=300",
         "city": "Bandung",
         "rating": 5.0,
-        "price" : "25.000",
+        "price" : 25000,
         "category": "lunch"
       },
       {
@@ -27,7 +27,7 @@
         "picture_url": "https://kln.imgix.net/production/L3NKQLDGDR-scaled_image_picker187724205518925654.jpg?w=300",
         "city": "Jakarta",
         "rating": 3.0,
-        "price" : "29.000",
+        "price" : 29000,
         "category": "dinner"
       }
     ]

@@ -7,6 +7,7 @@ import AppState from "./context/AppState";
 
 const AppBody = styled.section`
   padding: 0 16px 0 16px;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0),#ffffff);
 `;
 
 function App() {

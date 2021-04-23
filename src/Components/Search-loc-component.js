@@ -38,7 +38,7 @@ function SearchLocation({ locationName, location }) {
         setBottomSheetOpen(false);
       }}
     >
-      <span class="material-icons">location_on</span>
+      <span style={{color:"#e2e4e4"}} class="material-icons">location_on</span>
       <LocationColumn>
         <LocationName>{locationName}</LocationName>
         <Location>{location}</Location>

@@ -12,6 +12,10 @@ const DayName = styled.span`
     props.inactive &&
     ` color: #f1f1f2;
     `}
+  ${(props) =>
+    props.selected &&
+    ` color: white;
+        `}
 `;
 
 const DayInt = styled.span`
@@ -24,10 +28,22 @@ const DayInt = styled.span`
     props.inactive &&
     ` color: #f1f1f2;
     `}
+  ${(props) =>
+    props.selected &&
+    ` color: white;
+      `}
 `;
 
-const DayItem = styled.span`
-  padding: 4px 24px 4px 24px;
+const DayItem = styled.section`
+  margin: 8px;
+  padding: 8px 16px 8px 16px;
+  width: 32px;
+  height: 32px;
+  ${(props) =>
+    props.active &&
+    `background: #424749;
+    border-radius: 50%;
+    `}
 `;
 
 const SelectDaySection = styled.section`
@@ -39,23 +55,29 @@ const SelectDaySection = styled.section`
 `;
 
 function SelectDay() {
-  const { setAppDate } = useContext(AppContext);
+  const { setAppDate, date } = useContext(AppContext);
 
   return (
     <SelectDaySection>
-      {GetDates(new Date(), 14).map((date) =>
-        date.dayName == "SAB" || date.dayName == "MIN" ? (
-          <DayItem>
-            <DayName inactive>{date.dayName}</DayName>
-            <DayInt inactive>{date.dayInt}</DayInt>
-          </DayItem>
-        ) : (
-          <DayItem onClick={() => setAppDate(date.originalDate)}>
-            <DayName>{date.dayName}</DayName>
-            <DayInt>{date.dayInt}</DayInt>
-          </DayItem>
-        )
-      )}
+      {date &&
+        GetDates(new Date(), 14).map((date_data) =>
+          date_data.dayName == "SAB" || date_data.dayName == "MIN" ? (
+            <DayItem>
+              <DayName inactive>{date_data.dayName}</DayName>
+              <DayInt inactive>{date_data.dayInt}</DayInt>
+            </DayItem>
+          ) : date_data.originalDate.toString() == date.toString() ? (
+            <DayItem active>
+              <DayName selected>{date_data.dayName}</DayName>
+              <DayInt selected>{date_data.dayInt}</DayInt>
+            </DayItem>
+          ) : (
+            <DayItem onClick={() => setAppDate(date_data.originalDate)}>
+              <DayName>{date_data.dayName}</DayName>
+              <DayInt>{date_data.dayInt}</DayInt>
+            </DayItem>
+          )
+        )}
     </SelectDaySection>
   );
 }
